@@ -3,10 +3,7 @@ import logging
 from .jsonrpc_server import *
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(
-        level=logging.DEBUG,
-        format='{asctime} [{levelname:.4}] {name}: {message}',
-        style='{')
+
 
 class JsonRPCServerUDP (JsonRPCServerBase):
     host:str

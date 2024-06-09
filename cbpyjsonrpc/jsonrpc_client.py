@@ -6,8 +6,12 @@ class JsonRPCClientBase:
     def __init__(self) -> None:
         self.id_increment = 1
     
+    def settimeout(self,time_sec):
+        raise JsonRPCClientException('not implemets')
+
     def _request(self,req_dict:dict):
         raise JsonRPCClientException('not implemets')
+
     def _wait_response(self)->dict:
         raise JsonRPCClientException('not implemets')
 
