@@ -7,13 +7,13 @@ class JsonRPCClientBase:
         self.id_increment = 1
     
     def settimeout(self,time_sec):
-        raise JsonRPCClientException('not implemets')
+        raise JsonRPCClientException('not implemented')
 
     def _request(self,req_dict:dict):
-        raise JsonRPCClientException('not implemets')
+        raise JsonRPCClientException('not implemented')
 
     def _wait_response(self)->dict:
-        raise JsonRPCClientException('not implemets')
+        raise JsonRPCClientException('not implemented')
 
     def request_notify(self,method:str,params:dict):
         req_dict = {

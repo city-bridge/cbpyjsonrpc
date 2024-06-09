@@ -47,10 +47,10 @@ class JsonRPCServerBase:
 
         try:
             if not 'jsonrpc' in json_data:
-                raise JsonRPCIvalidRequestError('jsonrpc not exists')
+                raise JsonRPCInvalidRequestError('jsonrpc not exists')
 
             if json_data['jsonrpc'] != '2.0':
-                raise JsonRPCIvalidRequestError('jsonrpc version is not 2.0')
+                raise JsonRPCInvalidRequestError('jsonrpc version is not 2.0')
             
             method = self._get_method_func(json_data)
             result = method(params)
@@ -79,7 +79,7 @@ class JsonRPCServerBase:
 
     def _get_method_func(self,data:dict)->Callable:
         if not 'method' in data:
-            raise JsonRPCIvalidRequestError('method not exists')
+            raise JsonRPCInvalidRequestError('method not exists')
         method_name = data['method']
 
         if not method_name in self._method_list:

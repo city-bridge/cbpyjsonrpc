@@ -3,7 +3,7 @@ from .jsonrpc_define import *
 class JsonRPCException (Exception):
     pass
 
-class JsonRPCClientException(JsonRPCException):
+class JsonRPCClientException (JsonRPCException):
     pass
 
 class JsonRPCResponseException (JsonRPCException):
@@ -21,21 +21,21 @@ class JsonRPCResponseException (JsonRPCException):
 
 class JsonRPCParseError (JsonRPCResponseException):
     def __init__(self,msg) -> None:
-        super().__init__(ERROR_CODE_PARSE_ERROR,'Parse error:' + msg)
+        super().__init__(ERROR_CODE_PARSE_ERROR,'Parse error: ' + msg)
 
-class JsonRPCIvalidRequestError (JsonRPCResponseException):
+class JsonRPCInvalidRequestError (JsonRPCResponseException):
     def __init__(self, msg) -> None:
-        super().__init__(ERROR_CODE_INVALID_REQUEST, 'Invalid Request:' + msg)
+        super().__init__(ERROR_CODE_INVALID_REQUEST, 'Invalid Request: ' + msg)
 
 class JsonRPCMethodNotFoundError (JsonRPCResponseException):
     def __init__(self,msg) -> None:
-        super().__init__(ERROR_CODE_METHOD_NOT_FOUND, 'Method not found:' + msg)
+        super().__init__(ERROR_CODE_METHOD_NOT_FOUND, 'Method not found: ' + msg)
 
-class JsonRPCInvalidParamterError (JsonRPCResponseException):
+class JsonRPCInvalidParameterError (JsonRPCResponseException):
     def __init__(self,msg) -> None:
-        super().__init__(ERROR_CODE_INVALID_PARAMS, 'Invalid params:' + msg)
+        super().__init__(ERROR_CODE_INVALID_PARAMS, 'Invalid params: ' + msg)
 
 class JsonRPCInternalError (JsonRPCResponseException):
     def __init__(self,msg) -> None:
-        super().__init__(ERROR_CODE_INTERNAL_ERROR,'Internal error:' + msg)
+        super().__init__(ERROR_CODE_INTERNAL_ERROR,'Internal error: ' + msg)
 

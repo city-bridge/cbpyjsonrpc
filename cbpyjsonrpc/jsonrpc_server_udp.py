@@ -51,6 +51,4 @@ class JsonRPCServerUDP (JsonRPCServerBase):
                 if res_json != None:
                     sock.sendto(json.dumps(res_json).encode(encoding='utf-8'), cli_addr)
 
-
-            sock.close()
         self._run_flag = False
