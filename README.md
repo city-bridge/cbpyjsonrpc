@@ -18,7 +18,6 @@ import cbpyjsonrpc
 server = cbpyjsonrpc.JsonRPCServerUDP("localhost",10012)
 
 def echo_method(req:dict):
-    server._run_flag = False
     print("server recved",req)
     return req
 
