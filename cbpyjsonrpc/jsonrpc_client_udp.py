@@ -2,7 +2,7 @@ import socket
 import json
 from .jsonrpc_client import JsonRPCClientBase,JsonRPCClientException
 
-class JsonRPCUDPClient(JsonRPCClientBase):
+class JsonRPCClientUDP(JsonRPCClientBase):
     sock:socket.socket
     host:str
     port:int

@@ -1,6 +1,4 @@
-
-class JsonRPCClientException(Exception):
-    pass
+from .jsonrpc_exception import *
 
 class JsonRPCClientBase:
     id_increment:int
@@ -21,7 +19,7 @@ class JsonRPCClientBase:
         }
         self._request(req_dict)
 
-    def request_method(self,method:str,params:dict):
+    def request_method(self,method:str,params:dict)->dict:
         self.id_increment = self.id_increment + 1
         id = self.id_increment
         req_dict = {
@@ -34,8 +32,18 @@ class JsonRPCClientBase:
         self._request(req_dict)
         res_json = self._wait_response()
 
+        if not 'jsonrpc' in res_json:
+            raise JsonRPCClientException('jsonrpc not exists')
+
+        if res_json['jsonrpc'] != '2.0':
+            raise JsonRPCClientException('jsonrpc version is not 2.0')
+
         if 'error' in res_json:
-            raise JsonRPCClientException(str(res_json['error']))
+            if not 'code' in res_json['error']:
+                raise JsonRPCClientException('error code not exists' + str(res_json['error']))
+            if not 'message' in res_json['error']:
+                raise JsonRPCClientException('error message not exists' + str(res_json['error']))
+            raise JsonRPCResponseException(res_json['error']['code'], res_json['error']['message'])
         
         if not 'id' in res_json:
             raise JsonRPCClientException('id not exists')
