@@ -19,11 +19,15 @@ class JsonRPCClientUDP(JsonRPCClientBase):
     def settimeout(self,time_sec:float):
         self.sock.settimeout(time_sec)
 
-    def _request(self,req_dict:dict):
+    def _request(self,req_dict:dict, wait_res = True)->dict:
         json_str = json.dumps(req_dict) 
         json_byte = json_str.encode(encoding='utf-8')
         self.sock.sendto(json_byte,(self.host, self.port))
-
+        if wait_res:
+            return self._wait_response()
+        else:
+            return None
+        
     def _wait_response(self):
         timeout=False
         try:

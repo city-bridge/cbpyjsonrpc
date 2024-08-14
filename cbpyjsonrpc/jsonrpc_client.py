@@ -9,10 +9,7 @@ class JsonRPCClientBase:
     def settimeout(self,time_sec):
         raise JsonRPCClientException('not implemented')
 
-    def _request(self,req_dict:dict):
-        raise JsonRPCClientException('not implemented')
-
-    def _wait_response(self)->dict:
+    def _request(self,req_dict:dict, wait_res:bool)->dict:
         raise JsonRPCClientException('not implemented')
 
     def request_notify(self,method:str,params:dict):
@@ -21,7 +18,7 @@ class JsonRPCClientBase:
             'method':method,
             'params':params
         }
-        self._request(req_dict)
+        self._request(req_dict, wait_res=False)
 
     def request_method(self,method:str,params:dict)->dict:
         self.id_increment = self.id_increment + 1
@@ -33,8 +30,7 @@ class JsonRPCClientBase:
         }
         if params != None:
             req_dict['params'] = params
-        self._request(req_dict)
-        res_json = self._wait_response()
+        res_json = self._request(req_dict,wait_res=True)
 
         if not 'jsonrpc' in res_json:
             raise JsonRPCClientException('jsonrpc not exists')
