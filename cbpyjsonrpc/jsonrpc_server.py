@@ -52,6 +52,7 @@ class JsonRPCServerBase:
             if json_data['jsonrpc'] != '2.0':
                 raise JsonRPCInvalidRequestError('jsonrpc version is not 2.0')
             
+            self._validate_request(json_data)
             method = self._get_method_func(json_data)
             result = method(params)
 
@@ -88,3 +89,8 @@ class JsonRPCServerBase:
         methdo = self._method_list[method_name]
 
         return methdo
+    
+    def _validate_request(self,req_data:dict):
+        ''' validate request. implements user
+        '''
+        pass
