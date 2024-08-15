@@ -10,7 +10,6 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 version = "2024.8.15"
-dynamic = ["version"]
 
 [tool.setuptools.packages.find]
 exclude = ["build", "tests"]
